@@ -1,0 +1,46 @@
+<h1>CAMBIAR COLOR CIRCULOS</h1>
+
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    //canvas color gris
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400);
+    
+    //dibujar circulo
+    function dibujarCircunferencia(x,y,radio){
+        pincel.fillStyle = "blue";
+        pincel.beginPath();
+        pincel.arc(x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }
+
+    //limpar pantalla canvas
+    function limpiarPantalla(){
+        pincel.clearRect(0,0,600,400);//borra toda la pantalla de canvas
+    }
+
+    // limpiar pantalla, y dibujar circulo en x y sumarle una posicion
+    var x = 0;// crear la variable x en 0
+    var sentido = 1; // crear la variable con el sentido del circulo en 1
+    
+    function actualizarPantalla(){
+        limpiarPantalla();
+        if(x > 600){ // si x es mayor a 600(limite de canvas) hacemos que sentido sea menos 1 para retroceder hasta 0
+            sentido = - 1;
+        }else if( x < 0){ //si x es menor que cero se le empieza a sumar de a 1 en 1 hasta llegar a 600 (limite canvas)
+            sentido = 1;
+        }
+        dibujarCircunferencia(x,20,10);
+        x = x + sentido; //el valor de X mas el valor de sentido, cuando incia x en 0 se le suma de a 1. cuando llega a 600 es x menos 1.
+    }
+ 
+    // setInterval llama a la funcion actualizar pantalla cada cierta cantitad de segundos.
+    setInterval(actualizarPantalla,5);    
+    //Por ende la pantalla se limpia, se genera un circulo, se le suma una cantidad a X cada 100 milisegundos. (1000 milisegundos = 1 segundo)
+  
+    
+    
+</script>
